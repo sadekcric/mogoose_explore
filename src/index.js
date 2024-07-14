@@ -4,6 +4,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const booksRoute = require("./routes/books/books.routes.js");
 const usersRoute = require("./routes/users/users.routes.js");
+const postsRoute = require("./routes/posts/posts.route.js");
 
 const port = process.env.PORT || 3000;
 
@@ -11,6 +12,7 @@ app.use(express.json());
 
 app.use("/api/v1/books", booksRoute);
 app.use("/api/v1/users", usersRoute);
+app.use("/api/v1/posts", postsRoute);
 
 app.get("/", (req, res) => {
   res.send({ message: "Port is Running" });
