@@ -10,6 +10,17 @@ const getAllComment = async (req, res) => {
   }
 };
 
+// Get Comment By Id
+const getCommentById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const comment = await Comments.findById(id).populate(["author", "postId"]);
+    res.status(200).json(comment);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // Create Comment
 const CreateComment = async (req, res) => {
   try {
@@ -49,4 +60,4 @@ const deleteComment = async (req, res) => {
   }
 };
 
-module.exports = { getAllComment, CreateComment, updateComment, deleteComment };
+module.exports = { getAllComment, CreateComment, updateComment, deleteComment, getCommentById };
