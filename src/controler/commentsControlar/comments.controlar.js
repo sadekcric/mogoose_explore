@@ -37,8 +37,16 @@ const updateComment = async (req, res) => {
 };
 
 // Delete Comment
-const deleteComment = async(req, res) => {
+const deleteComment = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-}
+    await Comments.findByIdAndDelete(id);
+
+    res.status(200).json({ message: "Successfully Deleted!" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 module.exports = { getAllComment, CreateComment, updateComment, deleteComment };
